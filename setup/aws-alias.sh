@@ -24,3 +24,7 @@ then
     # This is Mac.  Use open to open the notebook
     alias aws-nb='open http://$instanceIp:8888'
 fi
+
+# call aws-get-p2 and aws-ip to set environment variables
+aws-get-p2
+aws-ip
