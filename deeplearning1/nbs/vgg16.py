@@ -6,6 +6,8 @@ import numpy as np
 from scipy import misc, ndimage
 from scipy.ndimage.interpolation import zoom
 
+import tensorflow as tf
+
 from keras import backend as K
 from keras.layers.normalization import BatchNormalization
 from keras.utils.data_utils import get_file
@@ -33,7 +35,10 @@ def vgg_preprocess(x):
             Image array (height x width x transposed_channels)
     """
     x = x - vgg_mean
-    return x[:, ::-1] # reverse axis rgb->bgr
+    axis = 1
+    r,g,b = tf.split(x, 3, axis)
+    return tf.concat([b,g,r], axis)
+    #return x[:, ::-1] # reverse axis rgb->bgr
 
 
 class Vgg16():
